@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const cookieParser = require("cookie-parser");
+const dotenv = require("dotenv");
 const app = express();
 const { requireAuth, checkUser}= require('./middlewares/authMiddleware')
 
@@ -13,8 +14,8 @@ app.use(cookieParser());
 app.set("view engine", "ejs");
 
 // database connection
-const dbURI =
-  "mongodb+srv://yoshi:yoshi123@cluster-auth.mqsce.mongodb.net/SmoothieDb";
+dotenv.config();
+const dbURI = process.env.MONGO_URI;
 mongoose
   .connect(dbURI)
   .then((result) =>
