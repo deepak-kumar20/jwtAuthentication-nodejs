@@ -4,7 +4,8 @@ const authRoutes = require("./routes/authRoutes");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const app = express();
-const { requireAuth, checkUser}= require('./middlewares/authMiddleware')
+const { requireAuth, checkUser}= require('./middlewares/authMiddleware');
+const User = require("./models/user");
 
 // middleware
 app.use(express.static("public"));
@@ -22,6 +23,7 @@ mongoose
     app.listen(7001, () => console.log("....server connected..."))
   )
   .catch((err) => console.log(err));
+
 
 // routes
 app.get('*', checkUser);
